@@ -24,12 +24,17 @@ template <class T> void _print(set <T> v) {cerr << "[ "; for (T i : v) {_print(i
 template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
 template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
 //******************************************************************************************************************************************
- 
+
 map<int,int>mp;
 int dig(int x){
-    return 1+(int)floor(log10(x));
+    int cnt=0;
+    while(x!=0){
+        cnt++;
+        x/=10;
+    }
+    return cnt;
 }
- 
+
 vector<int>split_digs(int x){
     vector<int>hold;
     while(x!=0){
@@ -38,7 +43,7 @@ vector<int>split_digs(int x){
     }
     return hold;
 }
- 
+
 int func(int n,int x){
     if(dig(x)==n) return 0;
     if(mp[x]!=0) return mp[x];
@@ -50,7 +55,7 @@ int func(int n,int x){
     }
     return mp[x]=minn;
 }
- 
+
 void solve(){
     int n,x;cin>>n>>x;
     int val=func(n,x);
@@ -61,11 +66,6 @@ int32_t main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
-#ifndef ONLINE_JUDGE
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
-    freopen("error.txt","w",stderr);
-#endif
     int T=1;
     // cin>>T;
     while(T--){
